@@ -32,6 +32,24 @@ function getShellConfigPath() {
 }
 
 function buildShellHook(isNative) {
+  // Commands/flags that should pass through directly without ccv interception
+  // These are non-interactive commands that don't involve API calls for logging
+  const passthroughList = [
+    // Version/help info
+    '--version', '-v', '--v',
+    '--help', '-h',
+    // System commands (no API calls)
+    'doctor',      // health check for auto-updater
+    'install',     // install native build
+    'update',      // self-update
+    'upgrade',     // alias for update
+    'auth',        // authentication management
+    'setup-token', // token setup
+    'agents',      // list configured agents
+    'plugin',      // plugin management
+    'mcp',         // MCP server configuration
+  ];
+
   if (isNative) {
     return `${SHELL_HOOK_START}
 claude() {
@@ -41,6 +59,13 @@ claude() {
     command claude "$@"
     return
   fi
+  # Pass through certain commands directly without ccv interception
+  case "$1" in
+    ${passthroughList.join('|')})
+      command claude "$@"
+      return
+      ;;
+  esac
   ccv run -- claude --ccv-internal "$@"
 }
 ${SHELL_HOOK_END}`;

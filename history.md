@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.9 (2026-03-02)
+
+- Fix: native mode shell hook now passes through non-interactive commands directly to claude instead of intercepting them: `--version`, `--help`, `doctor`, `install`, `update`, `upgrade`, `auth`, `setup-token`, `agents`, `plugin`, `mcp`
+
 ## 1.3.8 (2026-03-01)
 
 - Feat: inflight request detection — write request entry before fetch, deduplicate by timestamp+url on read; live spinner and popover for in-flight requests
