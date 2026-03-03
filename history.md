@@ -2,8 +2,6 @@
 
 ## 1.4.7 (2026-03-03)
 
-- Fix: server startup URL displayed as `0.0.0.0` (bind address) instead of accessible `127.0.0.1` — now shows and opens correct URL
-
 - UI: language selector moved from AppHeader right side to CC-Viewer dropdown as submenu
 - UI: display settings button changed from custom span to Ant Design Button for consistent height
 - UI: QR code section only renders in CLI mode, with title "Scan to Code" and copy-able URL input

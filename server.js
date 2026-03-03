@@ -758,8 +758,8 @@ export async function startViewer() {
         currentServer.listen(port, HOST, () => {
           server = currentServer;
           actualPort = port;
-          const url = `http://127.0.0.1:${port}`;
-          console.error(t('server.started', { host: '127.0.0.1', port }));
+          const url = `http://${HOST}:${port}`;
+          console.error(t('server.started', { host: HOST, port }));
           // v2.0.69 之前的版本会清空控制台，自动打开浏览器确保用户能看到界面
           try {
             const ccPkgPath = join(__dirname, '..', '@anthropic-ai', 'claude-code', 'package.json');
